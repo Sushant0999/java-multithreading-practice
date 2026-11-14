@@ -19,7 +19,7 @@ Use this repository as a structured practice roadmap for Java interviews and rea
 11. [Thread Safety and Java Memory Model](#11-thread-safety-and-java-memory-model)
 12. [Deadlock and Thread Problems](#12-deadlock-and-thread-problems)
 13. [Fork/Join Framework](#13-forkjoin-framework)
-14. [Modern Java Concurrency](#14-modern-java-concurrency)
+14. [Modern Java Concurrency & Virtual Threads](#14-modern-java-concurrency--virtual-threads)
 15. [Real-World Multithreading Problems](#15-real-world-multithreading-problems)
 16. [Debugging and Performance](#16-debugging-and-performance)
 
@@ -242,18 +242,145 @@ Use this repository as a structured practice roadmap for Java interviews and rea
 - [ ] Implement a parallel file-processing application.
 - [ ] Process a large collection using `ForkJoinPool`.
 
-### 14. Modern Java Concurrency
+### 14. Modern Java Concurrency & Virtual Threads
+
+> Use **Java 21** for the main virtual-thread exercises. Items marked **(Java 25)** rely on APIs finalized in Java 25.
+
+#### A. Virtual Thread Fundamentals
 
 - [ ] Create a virtual thread using `Thread.startVirtualThread()`.
+- [ ] Create a virtual thread using `Thread.ofVirtual().start()`.
+- [ ] Create a virtual thread using `Thread.ofVirtual().unstarted()`.
+- [ ] Start an unstarted virtual thread manually.
 - [ ] Create virtual threads using `Executors.newVirtualThreadPerTaskExecutor()`.
-- [ ] Execute 1,000 concurrent tasks using platform threads.
-- [ ] Execute 1,000 concurrent tasks using virtual threads.
-- [ ] Compare platform threads and virtual threads.
-- [ ] Implement concurrent API calls using virtual threads.
-- [ ] Implement task cancellation and resource cleanup.
-- [ ] Demonstrate blocking operations using virtual threads.
-- [ ] Implement a concurrent file-processing system using virtual threads.
-- [ ] Build a virtual-thread-based task processor.
+- [ ] Execute 100 virtual threads simultaneously.
+- [ ] Execute 1,000 virtual threads simultaneously.
+- [ ] Execute 10,000 virtual threads simultaneously.
+- [ ] Print the name and ID of a virtual thread.
+- [ ] Check whether a thread is virtual using `Thread.isVirtual()`.
+- [ ] Assign names to virtual threads using `Thread.Builder`.
+- [ ] Demonstrate virtual thread lifecycle and states.
+- [ ] Demonstrate `sleep()`, `join()`, and `interrupt()` with virtual threads.
+- [ ] Compare virtual thread creation with platform thread creation.
+- [ ] Create virtual threads using a custom `ThreadFactory`.
+
+#### B. Virtual Threads vs Platform Threads
+
+- [ ] Execute 1,000 tasks using platform threads.
+- [ ] Execute 1,000 tasks using virtual threads.
+- [ ] Execute 10,000 tasks using platform threads.
+- [ ] Execute 10,000 tasks using virtual threads.
+- [ ] Compare memory consumption between platform and virtual threads.
+- [ ] Compare startup time between platform and virtual threads.
+- [ ] Compare execution time for I/O-intensive tasks.
+- [ ] Compare execution time for CPU-intensive tasks.
+- [ ] Demonstrate why virtual threads are suitable for blocking I/O.
+- [ ] Demonstrate why virtual threads do not automatically improve CPU-intensive workloads.
+- [ ] Compare fixed thread pools with virtual-thread-per-task executors.
+- [ ] Measure throughput under different concurrency levels.
+
+#### C. Virtual Thread Executors
+
+- [ ] Execute multiple tasks using `newVirtualThreadPerTaskExecutor()`.
+- [ ] Submit `Runnable` tasks to a virtual-thread executor.
+- [ ] Submit `Callable` tasks and retrieve results using `Future`.
+- [ ] Execute multiple API-like tasks concurrently.
+- [ ] Implement graceful shutdown of a virtual-thread executor.
+- [ ] Demonstrate `shutdown()` and `close()` on an executor.
+- [ ] Implement task cancellation using `Future.cancel()`.
+- [ ] Handle exceptions from virtual-thread tasks.
+- [ ] Implement timeout handling for virtual-thread tasks.
+- [ ] Implement a task-processing system using virtual threads.
+- [ ] Implement a custom virtual-thread `ThreadFactory`.
+- [ ] Demonstrate why virtual-thread executors should generally not be treated like fixed-size thread pools.
+
+#### D. Blocking Operations and Scheduling
+
+- [ ] Execute `Thread.sleep()` inside a virtual thread.
+- [ ] Perform blocking I/O inside virtual threads.
+- [ ] Execute multiple tasks that wait for database-like responses.
+- [ ] Demonstrate how virtual threads are scheduled on carrier threads.
+- [ ] Understand the relationship between virtual threads and carrier threads.
+- [ ] Demonstrate virtual-thread unmounting during supported blocking operations.
+- [ ] Compare blocking operations in platform and virtual threads.
+- [ ] Implement concurrent file reading using virtual threads.
+- [ ] Implement concurrent HTTP requests using Java `HttpClient`.
+- [ ] Implement a system with thousands of waiting virtual threads.
+
+#### E. Synchronization and Thread Safety with Virtual Threads
+
+- [ ] Implement a shared counter using virtual threads.
+- [ ] Implement a thread-safe bank account using virtual threads.
+- [ ] Demonstrate race conditions using virtual threads.
+- [ ] Fix race conditions using `synchronized`.
+- [ ] Implement a shared inventory using virtual threads.
+- [ ] Implement a thread-safe Singleton accessed by virtual threads.
+- [ ] Use `ReentrantLock` with virtual threads.
+- [ ] Use `AtomicInteger` with virtual threads.
+- [ ] Implement Producer–Consumer using virtual threads.
+- [ ] Implement a bounded buffer using virtual threads.
+- [ ] Demonstrate why virtual threads do not eliminate the need for synchronization.
+- [ ] Implement a rate limiter for virtual-thread-based requests.
+- [ ] Limit concurrent database operations using `Semaphore`.
+
+#### F. Advanced Virtual Thread Concepts
+
+- [ ] Understand virtual thread pinning.
+- [ ] Demonstrate virtual thread pinning with intrinsic locks on Java 21.
+- [ ] Understand how blocking inside `synchronized` can affect virtual-thread scheduling.
+- [ ] Compare intrinsic locks and `ReentrantLock` in virtual-thread workloads.
+- [ ] Understand carrier thread scheduling.
+- [ ] Explore the virtual-thread scheduler.
+- [ ] Understand `jdk.virtualThreadScheduler.parallelism`.
+- [ ] Understand `jdk.virtualThreadScheduler.maxPoolSize`.
+- [ ] Monitor virtual threads using Java Flight Recorder (JFR).
+- [ ] Analyze virtual threads using thread dumps.
+- [ ] Understand the impact of `ThreadLocal` on virtual-thread memory consumption.
+- [ ] Demonstrate thread-local variables with virtual threads.
+- [ ] Use `ScopedValue` to share immutable context across a task hierarchy (Java 25).
+- [ ] Explore structured concurrency using `StructuredTaskScope` (Java 25).
+- [ ] Implement cancellation and error propagation using structured concurrency.
+- [ ] Compare structured concurrency with `CompletableFuture`.
+
+#### G. Real-World Virtual Thread Problems
+
+- [ ] Build a REST API simulator handling 10,000 concurrent requests.
+- [ ] Implement concurrent HTTP calls using virtual threads.
+- [ ] Build a parallel API aggregator using virtual threads.
+- [ ] Implement a database connection pool with virtual threads.
+- [ ] Build a concurrent file downloader using virtual threads.
+- [ ] Implement a concurrent file-processing application.
+- [ ] Build a virtual-thread-based order-processing system.
+- [ ] Implement concurrent payment processing using virtual threads.
+- [ ] Build a notification delivery system using virtual threads.
+- [ ] Implement a chat server supporting thousands of concurrent clients.
+- [ ] Build a concurrent log-processing application.
+- [ ] Implement a rate-limited API client using virtual threads.
+- [ ] Build a web crawler using virtual threads.
+- [ ] Implement a concurrent inventory reservation system.
+- [ ] Build a task scheduler using virtual threads.
+- [ ] Implement a retry mechanism for failed virtual-thread tasks.
+- [ ] Build a microservice that handles concurrent downstream service calls.
+- [ ] Implement graceful cancellation when a client disconnects.
+- [ ] Build a bounded request-processing system using virtual threads and semaphores.
+- [ ] Implement request tracing and context propagation using scoped values (Java 25).
+
+#### H. Virtual Thread Debugging and Performance
+
+- [ ] Generate a thread dump containing virtual threads.
+- [ ] Analyze virtual threads using `jcmd`.
+- [ ] Identify virtual-thread pinning using JFR.
+- [ ] Monitor carrier thread utilization.
+- [ ] Identify excessive memory consumption caused by virtual threads.
+- [ ] Benchmark 1,000 platform threads against 1,000 virtual threads.
+- [ ] Benchmark 10,000 concurrent I/O operations.
+- [ ] Identify bottlenecks in a virtual-thread-based application.
+- [ ] Identify database connection pool exhaustion.
+- [ ] Identify resource contention in a virtual-thread application.
+- [ ] Compare `synchronized` and `ReentrantLock` under virtual-thread workloads.
+- [ ] Identify improper use of `ThreadLocal`.
+- [ ] Test interruption and cancellation of virtual threads.
+- [ ] Write concurrent tests for virtual-thread-based applications.
 
 ### 15. Real-World Multithreading Problems
 
@@ -302,10 +429,41 @@ The exercises cover APIs from different Java releases. Use a JDK that supports t
 | Topic | Minimum Java version |
 |---|---:|
 | Core threads, synchronization, locks, executors, and concurrent collections | Java 8 |
+| Core concurrency APIs | Java 8 |
 | `CompletableFuture` | Java 8 |
-| Virtual threads (`Thread.startVirtualThread()` and `newVirtualThreadPerTaskExecutor()`) | Java 21 |
+| Virtual threads (preview) | Java 19 |
+| Virtual threads (final) | Java 21 |
+| `StructuredTaskScope` (preview API) | Java 21 |
+| `ScopedValue` (preview API) | Java 21 |
+| `ScopedValue` (final) | Java 25 |
+| Structured concurrency (final) | Java 25 |
 
-**Recommended setup:** Use Java 21 or later to practice the full collection, while keeping in mind that some exercises intentionally cover APIs available in Java 8.
+> **Note:** Preview APIs require preview features to be enabled and have changed between releases. Java 25 finalized Scoped Values and Structured Concurrency.
+
+**Recommended setup:** Use **Java 21** as the baseline for the main virtual-thread exercises, and create a separate **Java 25** branch for finalized Structured Concurrency and Scoped Values. Some exercises intentionally cover APIs available in Java 8.
+
+## Virtual Thread Interview Questions
+
+These are particularly useful for senior Java backend interviews:
+
+1. What is the difference between platform threads and virtual threads?
+2. Why are virtual threads called lightweight threads?
+3. What is a carrier thread?
+4. Can virtual threads execute CPU-intensive tasks faster?
+5. What happens when a virtual thread performs a blocking operation?
+6. What is virtual thread pinning?
+7. Why should you avoid pooling virtual threads?
+8. Can we use `synchronized` with virtual threads?
+9. How do you limit concurrent database connections when using virtual threads?
+10. What happens when a virtual thread is interrupted?
+11. How does `ThreadLocal` behave with virtual threads?
+12. What is structured concurrency?
+13. What is the difference between structured concurrency and `CompletableFuture`?
+14. How do you debug virtual-thread applications?
+15. Can we create millions of virtual threads?
+16. When should you prefer platform threads over virtual threads?
+17. How do virtual threads improve scalability in Spring Boot applications?
+18. Do virtual threads eliminate thread-safety problems?
 
 ## Interview Preparation Checklist
 
@@ -313,6 +471,7 @@ The exercises cover APIs from different Java releases. Use a JDK that supports t
 - [ ] Practice locks, thread communication, and atomic operations.
 - [ ] Work through executors, thread pools, and concurrent collections.
 - [ ] Understand the Java Memory Model and common thread-safety problems.
+- [ ] Practice virtual threads, pinning, and structured concurrency.
 - [ ] Solve real-world concurrency scenarios.
 - [ ] Practice thread dumps, debugging, and performance comparisons.
 - [ ] Reimplement important problems without referring to previous solutions.
