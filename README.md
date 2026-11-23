@@ -59,11 +59,11 @@ Use this repository as a structured practice roadmap for Java interviews and rea
 
 ### 2. Synchronization
 
-- [ ] Create a shared counter and increment it using multiple threads.
-- [ ] Demonstrate a race condition using multiple threads.
-- [ ] Fix the race condition using `synchronized`.
-- [ ] Implement a thread-safe bank account.
-- [ ] Implement deposit and withdrawal operations using multiple threads.
+- [Create a shared counter and increment it using multiple threads.](synchronization/Shared_Counter_With_Multiple_Threads)
+- [Demonstrate a race condition using multiple threads.](synchronization/Race_Condition)
+- [Fix the race condition using `synchronized`.](synchronization/synchronization/Race_Condition)
+- [Implement a thread-safe bank account.](synchronization/Thread_Safe_Bank)
+- [Implement deposit and withdrawal operations using multiple threads.](synchronization/Thread_Safe_Bank_II)
 - [ ] Create a ticket booking system where multiple threads book seats simultaneously.
 - [ ] Implement a thread-safe inventory management system.
 - [ ] Demonstrate synchronized instance methods.
@@ -248,11 +248,11 @@ Use this repository as a structured practice roadmap for Java interviews and rea
 
 #### A. Virtual Thread Fundamentals
 
-- [ ] Create a virtual thread using `Thread.startVirtualThread()`.
-- [ ] Create a virtual thread using `Thread.ofVirtual().start()`.
-- [ ] Create a virtual thread using `Thread.ofVirtual().unstarted()`.
-- [ ] Start an unstarted virtual thread manually.
-- [ ] Create virtual threads using `Executors.newVirtualThreadPerTaskExecutor()`.
+- [Create a virtual thread using `Thread.startVirtualThread()`.](virtual_thread_fundamentals/virtual_thread_fundamentals/Create_Virtual_Thread_I)
+- [Create a virtual thread using `Thread.ofVirtual().start()`.](virtual_thread_fundamentals/Create_Virtual_Thread_II)
+- [Create a virtual thread using `Thread.ofVirtual().unstarted()`.](virtual_thread_fundamentals/Create_Virtual_Thread_III.java)
+- [Start an unstarted virtual thread manually.](virtual_thread_fundamentals/Create_Virtual_Thread_III.java)
+- [Create virtual threads using `Executors.newVirtualThreadPerTaskExecutor()`.](virtual_thread_fundamentals/Create_Virtual_Threads_Using_Executors)
 - [ ] Execute 100 virtual threads simultaneously.
 - [ ] Execute 1,000 virtual threads simultaneously.
 - [ ] Execute 10,000 virtual threads simultaneously.
